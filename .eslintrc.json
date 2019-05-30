@@ -1,0 +1,21 @@
+{
+  "extends": "cheesecakelabs/react",
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "rules": {
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": ["dist/**"] }
+    ]
+  },
+  "globals": {},
+  "plugins": ["react", "babel"]
+}
