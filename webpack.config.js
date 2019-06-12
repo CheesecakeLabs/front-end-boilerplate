@@ -17,5 +17,29 @@ module.exports = {
     publicPath: "/static/",
     hotUpdateChunkFilename: "hot/hot-update.js",
     hotUpdateMainFilename: "hot/hot-update.json"
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: "style-loader"
+          },
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1,
+              modules: {
+                localIdentName: "[local]___[hash:base64:5]"
+              }
+            }
+          },
+          {
+            loader: "postcss-loader"
+          }
+        ]
+      }
+    ]
   }
 };
