@@ -18,12 +18,6 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run eslint-staged",
-      "pre-push": "npm run eslint"
-    }
-  },
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",

@@ -1,0 +1,6 @@
+{
+  "hooks": {
+    "pre-commit": "npm run eslint-staged",
+    "pre-push": "npm run eslint"
+  }
+}
