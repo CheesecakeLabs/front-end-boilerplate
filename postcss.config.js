@@ -8,6 +8,19 @@ const cssVariables = require("./src/config/css-variables");
 
 const postCSSAutoprefixer = autoprefixer({ browsers: ["IE 9", "iOS 7"] });
 
+const gridBreakpoints = {
+  xs: 0,
+  sm: "576px",
+  md: "768px",
+  lg: "992px",
+  xl: "1200px",
+  xxl: "1440px",
+  retina: {
+    minPixelRatio: 1.25,
+    minResolution: "120dpi"
+  }
+};
+
 module.exports = {
   plugins: [
     postCSSImport,
@@ -19,12 +32,15 @@ module.exports = {
     postCSSCustomMedia({
       importFrom: {
         customMedia: {
-          "--iphone5-viewport": "(max-height: 570px)",
-          "--sm-viewport": "(min-width:320px) and (max-width:640px)",
-          "--md-viewport": "(min-width:640px) and (max-width:960px)",
-          "--lg-viewport": "(min-width:960px)",
-          "--retina-display":
-            "(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+          "--xs-viewport": `(max-width: ${gridBreakpoints.xs})`,
+          "--sm-viewport": `(max-width: ${gridBreakpoints.sm})`,
+          "--md-viewport": `(max-width: ${gridBreakpoints.md})`,
+          "--lg-viewport": `(max-width: ${gridBreakpoints.lg})`,
+          "--xlg-viewport": `(max-width: ${gridBreakpoints.xl})`,
+          "--xxlg-viewport": `(max-width: ${gridBreakpoints.xxl})`,
+          "--retina-display": `(-webkit-min-device-pixel-ratio: ${
+            gridBreakpoints.retina.minPixelRatio
+          }), (min-resolution: ${gridBreakpoints.retina.minResolution})`
         }
       }
     }),
