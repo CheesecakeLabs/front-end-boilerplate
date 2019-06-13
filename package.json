@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack --config webpack.config.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "eslint": "eslint .",
+    "eslint-staged": "files=`git diff --staged --diff-filter=AM --name-only | grep .js$ | tr '\n' ' '`; if [ -n \"$files\" ]; then eslint $files; fi;"
   },
   "author": "Daniel Leite de Oliveira <dleitee@gmail.com> (https://github.com/dleitee)",
   "license": "ISC",
@@ -14,6 +16,12 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run eslint-staged",
+      "pre-push": "npm run eslint"
+    }
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
@@ -29,6 +37,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.13.0",
+    "husky": "2.4.1",
     "postcss": "^7.0.16",
     "postcss-color-function": "^4.1.0",
     "postcss-css-variables": "^0.12.0",
