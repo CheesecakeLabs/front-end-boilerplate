@@ -1,4 +1,5 @@
 const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const dotenv = require("dotenv");
 
@@ -18,26 +19,31 @@ module.exports = {
     hotUpdateChunkFilename: "hot/hot-update.js",
     hotUpdateMainFilename: "hot/hot-update.json"
   },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: isProduction ? "[name].[hash].css" : "bundle.css",
+      chunkFilename: isProduction ? "[id].[hash].css" : "bundle.css"
+    })
+  ],
   module: {
     rules: [
       {
         test: /\.css$/,
+        exclude: /node_modules/,
         use: [
-          {
-            loader: "style-loader"
-          },
+          MiniCssExtractPlugin.loader,
           {
             loader: "css-loader",
             options: {
               importLoaders: 1,
               modules: {
-                localIdentName: "[local]___[hash:base64:5]"
+                localIdentName: isProduction
+                  ? "[hash:base64:5]"
+                  : "[name]_[local]__[hash:base64:5]"
               }
             }
           },
-          {
-            loader: "postcss-loader"
-          }
+          "postcss-loader"
         ]
       }
     ]
