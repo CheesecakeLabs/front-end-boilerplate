@@ -36,8 +36,8 @@ module.exports = {
           "--sm-viewport": `(max-width: ${gridBreakpoints.sm})`,
           "--md-viewport": `(max-width: ${gridBreakpoints.md})`,
           "--lg-viewport": `(max-width: ${gridBreakpoints.lg})`,
-          "--xlg-viewport": `(max-width: ${gridBreakpoints.xl})`,
-          "--xxlg-viewport": `(max-width: ${gridBreakpoints.xxl})`,
+          "--xl-viewport": `(max-width: ${gridBreakpoints.xl})`,
+          "--xxl-viewport": `(max-width: ${gridBreakpoints.xxl})`,
           "--retina-display": `(-webkit-min-device-pixel-ratio: ${
             gridBreakpoints.retina.minPixelRatio
           }), (min-resolution: ${gridBreakpoints.retina.minResolution})`
