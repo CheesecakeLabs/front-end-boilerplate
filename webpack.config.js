@@ -17,5 +17,44 @@ module.exports = {
     publicPath: "/static/",
     hotUpdateChunkFilename: "hot/hot-update.js",
     hotUpdateMainFilename: "hot/hot-update.json"
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['es2015']
+            }
+          },
+          {
+            test: /\.css$/i,
+            loader: 'css-loader',
+            options: {
+              modules: true,
+            },
+          },
+          {
+            test: /\.html$/,
+            use: ['html-loader']
+          },
+          {
+            test: /\.(jpg|png)$/,
+            use: [
+              {
+                loader: 'file-loader',
+                options: {
+                  name: '[name].[ext]',
+                  outputPath: 'img/',
+                  publicPath: 'img/'
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
 };
