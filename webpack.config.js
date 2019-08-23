@@ -1,15 +1,16 @@
-const path = require("path");
+
+const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const dotenv = require("dotenv");
+const dotenv = require('dotenv')
 
-dotenv.config();
+dotenv.config()
 
-const isProduction = process.env.APP_ENV === "production";
+const isProduction = process.env.APP_ENV === 'production'
 
 module.exports = {
   entry: {
-    app: [path.resolve(__dirname, "src", "index.js")]
+    app: [path.resolve(__dirname, 'src', 'index.js')],
   },
   mode: process.env.APP_ENV,
   output: {
