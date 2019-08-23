@@ -1,12 +1,10 @@
 const path = require('path')
 
-const HtmlWebPackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const dotenv = require('dotenv')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const HtmlWebPackPlugin = require('html-webpack-plugin')
 
 dotenv.config()
-
-const isProduction = process.env.APP_ENV === 'production'
 
 module.exports = {
   entry: {
@@ -15,16 +13,11 @@ module.exports = {
   mode: process.env.APP_ENV,
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: isProduction ? '[name].[hash].js' : '[name].bundle.js',
     publicPath: '/',
     hotUpdateChunkFilename: 'hot/hot-update.js',
     hotUpdateMainFilename: 'hot/hot-update.json',
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: isProduction ? '[name].[hash].css' : 'bundle.css',
-      chunkFilename: isProduction ? '[id].[hash].css' : 'bundle.css',
-    }),
     new HtmlWebPackPlugin({
       template: './src/index.html',
       filename: './index.html',
@@ -42,9 +35,7 @@ module.exports = {
             options: {
               importLoaders: 1,
               modules: {
-                localIdentName: isProduction
-                  ? '[hash:base64:5]'
-                  : '[name]_[local]__[hash:base64:5]',
+                localIdentName: '[hash:base64:5]',
               },
             },
           },
@@ -76,11 +67,6 @@ module.exports = {
         ],
       },
     ],
-  },
-  devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    compress: false,
-    port: 4000,
   },
   resolve: {
     modules: [path.join(__dirname), path.join(__dirname, 'node_modules')],
