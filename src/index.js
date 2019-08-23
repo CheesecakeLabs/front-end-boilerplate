@@ -1,3 +1,6 @@
-/* eslint-disable no-console */
-console.log('Hello CKL')
-/* eslint-enable no-console */
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+const App = () => <div>Frontend Boilerplate</div>
+
+ReactDOM.render(<App />, document.querySelector('#root'))
