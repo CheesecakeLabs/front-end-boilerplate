@@ -46,8 +46,5 @@ module.exports = async ({ config }) => {
   },
 ]
 
-  console.log('new rules', rules)
-  console.log('not new rules', config.module.rules)
-
   return config;
 }
