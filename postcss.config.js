@@ -7,7 +7,7 @@ const colorFunction = require('postcss-color-function')
 
 const cssVariables = require('./src/config/css-variables')
 
-const postCSSAutoprefixer = autoprefixer({ browsers: ['IE 9', 'iOS 7'] })
+const postCSSAutoprefixer = autoprefixer()
 
 const gridBreakpoints = {
   xs: 0,
