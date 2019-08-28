@@ -8,5 +8,14 @@
   "bracketSpacing": true,
   "jsxBracketSameLine": true,
   "arrowParens": "avoid",
-  "parser": "babel"
+  "parser": "babel",
+  "overrides": [
+    {
+      "files": "*.css",
+      "options": {
+        "singleQuote": false,
+        "parser": "css"
+      }
+    }
+  ]
 }
