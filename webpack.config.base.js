@@ -8,18 +8,16 @@ dotenv.config()
 
 module.exports = {
   entry: {
-    app: [path.resolve(__dirname, 'src', 'index.js')],
+    app: [path.resolve(__dirname, 'src', 'app.js')],
   },
   mode: process.env.APP_ENV,
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
-    hotUpdateChunkFilename: 'hot/hot-update.js',
-    hotUpdateMainFilename: 'hot/hot-update.json',
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: './src/index.html',
+      template: './public/index.html',
       filename: './index.html',
     }),
   ],
@@ -51,7 +49,12 @@ module.exports = {
       },
       {
         test: /\.html$/,
-        use: ['html-loader'],
+        use: {
+          loader: 'html-loader',
+          options: {
+            attrs: ['img:src', 'link:href'],
+          },
+        },
       },
       {
         test: /\.(jpg|png|gif|svg)$/,
