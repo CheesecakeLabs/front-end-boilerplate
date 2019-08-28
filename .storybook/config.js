@@ -1,7 +1,7 @@
-
 import { configure, addDecorator, addParameters } from '@storybook/react'
 import { withInfo } from '@storybook/addon-info'
-import CheesecakeTheme from './ckl-theme';
+
+import CheesecakeTheme from './ckl-theme'
 
 import '../src/styles/base.css'
 
@@ -11,15 +11,15 @@ addParameters({
   options: {
     theme: CheesecakeTheme,
   },
-});
+})
 
-addDecorator(withInfo({
-  header: false,
-  inline: false,
-  source: true,
-}))
-
-
+addDecorator(
+  withInfo({
+    header: false,
+    inline: false,
+    source: true,
+  })
+)
 function loadStories() {
   stories.keys().forEach(stories)
 }
