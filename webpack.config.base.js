@@ -35,7 +35,7 @@ module.exports = {
             options: {
               importLoaders: 1,
               modules: {
-                localIdentName: '[hash:base64:5]',
+                localIdentName: '[local]__[hash:base64:5]',
               },
             },
           },
