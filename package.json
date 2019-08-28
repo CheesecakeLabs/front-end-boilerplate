@@ -8,6 +8,8 @@
     "dev": "webpack-dev-server --open --hot --config webpack.config.dev.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook",
+    "stylelint": "stylelint .",
+    "stylelint-staged": "files=`git diff --staged --diff-filter-AM --name-only | grep .css$ | tr '\n' ' '`; if [ -n \"$files\" ]; then stylelint $files; fi;",
     "eslint": "eslint .",
     "eslint-staged": "files=`git diff --staged --diff-filter=AM --name-only | grep .js$ | tr '\n' ' '`; if [ -n \"$files\" ]; then eslint $files; fi;"
   },
@@ -31,6 +33,7 @@
     "@babel/preset-react": "^7.0.0",
     "@storybook/addon-info": "5.1.11",
     "@storybook/react": "5.1.11",
+    "@cheesecakelabs/stylelint-config-cheesecakelabs": "0.3.3",
     "autoprefixer": "^9.5.1",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.6",
@@ -53,8 +56,10 @@
     "postcss-import": "^12.0.1",
     "postcss-loader": "3.0.0",
     "postcss-nested": "^4.1.2",
-    "prettier": "^1.17.1",
+    "prettier": "1.18.2",
     "stylelint": "^10.0.1",
+    "stylelint-config-prettier": "5.2.0",
+    "stylelint-prettier": "1.1.1",
     "webpack": "^4.32.2",
     "webpack-cli": "3.3.2",
     "webpack-dev-server": "3.8.0"

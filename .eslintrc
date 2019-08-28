@@ -6,43 +6,16 @@
     "jest": true
   },
   "parser": "babel-eslint",
-  "plugins": ["react", "babel"],
-  "settings": {
-    "import/resolver": {
-      "webpack": {
-        "config": "webpack.config.base.js"
-      }
-    }
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
   },
   "rules": {
     "import/no-extraneous-dependencies": [
       "error",
-      {
-        "devDependencies": [
-          "**/*.dev.js",
-          "**/*.test.js",
-          "**/*.stories.js",
-          "server.js",
-          "next.config.js",
-          "postcss.config.js",
-          "webpack.config.*",
-          "storybook/*"
-        ]
-      }
-    ],
-    "import/order": [
-      "error",
-      {
-        "newlines-between": "always",
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          "parent",
-          "sibling",
-          "index"
-        ]
-      }
+      { "devDependencies": ["dist/**"] }
     ]
   },
+  "globals": {},
+  "plugins": ["react", "babel"]
 }
