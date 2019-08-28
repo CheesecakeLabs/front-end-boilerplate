@@ -6,10 +6,7 @@
     "jest": true
   },
   "parser": "babel-eslint",
-  "parserOptions": {
-    "ecmaVersion": 2018,
-    "sourceType": "module"
-  },
+  "plugins": ["react", "babel"],
   "settings": {
     "import/resolver": {
       "webpack": {
@@ -48,6 +45,4 @@
       }
     ]
   },
-  "globals": {},
-  "plugins": ["react", "babel"]
 }
