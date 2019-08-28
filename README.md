@@ -1,4 +1,4 @@
-# CKL Frontend Boilerplate
+# 🍰 CKL Frontend Boilerplate
 
 ## Requirements
 
