@@ -4210,10 +4210,10 @@ eslint-config-airbnb@^18.0.1:
     object.assign "^4.1.0"
     object.entries "^1.1.0"
 
-eslint-config-cheesecakelabs@4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/eslint-config-cheesecakelabs/-/eslint-config-cheesecakelabs-4.0.1.tgz#7418c6ed0678e29270503c050e4d593702a0c01b"
-  integrity sha512-t9KaaCslHx/6Ke1rly2dMpgTIxH5Pe6CTG+d1sEjOQpKXaXLbkUIQnfX6lhNeVgdEdFDrP6n/rDVfyvqiDSe7w==
+eslint-config-cheesecakelabs@4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/eslint-config-cheesecakelabs/-/eslint-config-cheesecakelabs-4.0.2.tgz#3cf79df7c00bdae9b643cb817990bca8647a0a52"
+  integrity sha512-tnocrllu5LWSwnSI3tb+s46gzyikHZu24fAUwxNcBHpsNfVbZdfBqNQy7qgqUMdN+/KoGGams+KOFnBNwlmHLQ==
   dependencies:
     eslint-config-airbnb "^18.0.1"
     eslint-config-airbnb-base "^14.0.0"
