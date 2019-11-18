@@ -9,6 +9,7 @@
   "plugins": ["react", "babel"],
   "settings": {
     "import/resolver": {
+      "node": {},
       "webpack": {
         "config": "webpack.config.base.js"
       }
@@ -44,5 +45,5 @@
         ]
       }
     ]
-  },
+  }
 }
