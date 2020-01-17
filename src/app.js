@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import '../styles/base.css'
+import './styles/base.css'
 
 const App = () => <div>Frontend Boilerplate</div>
 
