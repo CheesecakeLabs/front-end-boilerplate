@@ -90,6 +90,7 @@ module.exports = {
       _config: path.resolve(__dirname, 'src', 'config'),
       _hoc: path.resolve(__dirname, 'src', 'hoc'),
       _utils: path.resolve(__dirname, 'src', 'utils'),
+      _services: path.resolve(__dirname, 'src', 'services'),
     },
   },
   ...resolve,
