@@ -13,6 +13,7 @@
 - [🐺 Husky](https://github.com/typicode/husky)
 - [💜 Eslint](https://eslint.org)
 - [🖤 Stylelint](https://stylelint.io/)
+- [🌎 Axios](https://github.com/axios/axios)
 
 ## How to use
 
