@@ -1,4 +1,4 @@
-import { RequestHandler } from '_services/api'
+import { http } from '_services/api'
 
 const GITHUB_USER_INFO_URL = user => `users/${user}`
 
@@ -18,9 +18,9 @@ class ExampleRequestService {
 
   getUserInfo(user) {
     if (user) {
-      return RequestHandler.get(GITHUB_USER_INFO_URL(user))
+      return http.get(GITHUB_USER_INFO_URL(user))
     }
-    return RequestHandler.get(GITHUB_USER_INFO_URL(this.exampleUser))
+    return http.get(GITHUB_USER_INFO_URL(this.exampleUser))
   }
 }
 
