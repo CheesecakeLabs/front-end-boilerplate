@@ -1,2 +1,2 @@
-export { default as RequestHandler } from './request-handler'
-export { default as AuthRequestHandler } from './auth-request-handler'
+export { default as http } from './http'
+export { default as httpAuth } from './http-auth'
