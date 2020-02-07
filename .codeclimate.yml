@@ -1,0 +1,20 @@
+version: '2'
+checks:
+  complex-logic:
+    config:
+      threshold: 7
+plugins:
+  eslint:
+    enabled: true
+    channel: 'eslint-6'
+    config:
+      config: .eslintrc
+      ignore_warnings: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+        javascript:
+          mass_threshold: 50
+exclude_patterns:
+  - '**/node_modules/'
