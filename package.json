@@ -7,7 +7,7 @@
     "build": "webpack --config webpack.config.prod.js && node server.js",
     "dev": "webpack-dev-server --open --hot --config webpack.config.dev.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "storybook": "start-storybook",
+    "storybook": "start-storybook -p 9009 -c storybook",
     "stylelint": "stylelint .",
     "stylelint-staged": "files=`git diff --staged --diff-filter-AM --name-only | grep .css$ | tr '\n' ' '`; if [ -n \"$files\" ]; then stylelint $files; fi;",
     "eslint": "eslint .",
