@@ -1,7 +1,7 @@
 const path = require('path')
 const Dotenv = require('dotenv-webpack')
 
-const webpackConfig = require('../webpack.extra')
+const webpackConfig = require('../webpack.config.resolve')
 
 module.exports = async ({ config }) => {
   const rules = config.module.rules.filter(rule => !rule.test.test('.css'))
