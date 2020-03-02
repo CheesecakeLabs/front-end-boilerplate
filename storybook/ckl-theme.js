@@ -1,4 +1,4 @@
-import { create } from '@storybook/theming';
+import { create } from '@storybook/theming'
 
 export default create({
   base: 'dark',
@@ -33,5 +33,6 @@ export default create({
 
   brandTitle: 'Cheesecake Labs UI Toolkit',
   brandUrl: 'https://cheesecakelabs.com',
-  brandImage: 'https://cheesecakelabs.com/wp-content/themes/cheesecake_labs/images/cheesecake-logo.svg',
-});
+  brandImage:
+    'https://cheesecakelabs.com/wp-content/themes/cheesecake_labs/images/cheesecake-logo.svg',
+})

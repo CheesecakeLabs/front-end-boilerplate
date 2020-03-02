@@ -38,6 +38,7 @@
     "@cheesecakelabs/stylelint-config-cheesecakelabs": "1.0.0",
     "@storybook/addon-info": "5.3.14",
     "@storybook/react": "5.3.14",
+    "@storybook/theming": "5.3.14",
     "autoprefixer": "^9.5.1",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.6",

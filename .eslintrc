@@ -44,7 +44,8 @@
           "index"
         ]
       }
-    ]
+    ],
+    "react/jsx-props-no-spreading": ["off"]
   },
   "globals": {}
 }
