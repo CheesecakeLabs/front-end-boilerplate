@@ -1,12 +1,13 @@
 {
-  "extends": "cheesecakelabs/react",
+  "extends": ["cheesecakelabs/react"],
+  "parser": "babel-eslint",
+  "plugins": ["babel", "react"],
   "env": {
     "browser": true,
     "node": true,
+    "es6": true,
     "jest": true
   },
-  "parser": "babel-eslint",
-  "plugins": ["react", "babel"],
   "settings": {
     "import/resolver": {
       "webpack": {
@@ -44,5 +45,6 @@
         ]
       }
     ]
-  }
+  },
+  "globals": {}
 }
