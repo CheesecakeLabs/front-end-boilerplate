@@ -1,8 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
+
+import Routes from '_pages'
 
 import './styles/base.css'
 
-const App = () => <div>Frontend Boilerplate</div>
-
-ReactDOM.render(<App />, document.querySelector('#root'))
+ReactDOM.render(
+  <BrowserRouter>
+    <Routes />
+  </BrowserRouter>,
+  document.querySelector('#root')
+)
