@@ -1,0 +1,132 @@
+version: 2
+
+references:
+  container_config: &container_config
+    docker:
+      - image: circleci/node:12.9.1
+  restore_repo: &restore_repo
+    restore_cache:
+      keys:
+        - v1-repo-{{ .Revision }}
+  restore_node_modules: &restore_node_modules
+    restore_cache:
+      keys:
+        - node_modules-{{ checksum "yarn.lock" }}
+        - node_modules-
+  create_aws_credentials: &create_aws_credentials
+    run:
+      name: Create AWS credentials manually
+      command: |
+        mkdir ~/.aws
+        touch ~/.aws/config
+        chmod 600 ~/.aws/config
+        echo "[profile default]" > ~/.aws/config
+        echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> ~/.aws/config
+        echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> ~/.aws/config
+  install_aws_cli: &install_aws_cli
+    run:
+      name: Installing awscli
+      command: |
+        sudo apt-get install python3-pip
+        sudo pip3 install --upgrade setuptools awscli
+        sudo apt-get install jq
+        curl https://raw.githubusercontent.com/silinternational/ecs-deploy/master/ecs-deploy | sudo tee /usr/bin/ecs-deploy
+        sudo chmod +x /usr/bin/ecs-deploy
+jobs:
+  checkout_code:
+    <<: *container_config
+    steps:
+      - *restore_repo
+      - checkout
+      - save_cache:
+          key: v1-repo-{{ .Revision }}
+          paths:
+            - .
+  install_dependencies:
+    <<: *container_config
+    steps:
+      - *restore_repo
+      - *restore_node_modules
+      - run:
+          name: Install Dependecies
+          command: |
+            yarn install
+      - save_cache:
+          key: node_modules-{{ checksum "yarn.lock" }}
+          paths:
+            - "node_modules"
+  deploy_lab:
+    <<: *container_config
+    steps:
+      - *restore_repo
+      - *create_aws_credentials
+      - *install_aws_cli
+      - setup_remote_docker
+      - run:
+          name: Build, Push and Deploy to Lab
+          command: |
+            eval $(aws ecr get-login --region $AWS_REGION | sed 's|https://||' | sed 's|-e none ||')
+            docker build -t <PROJECT-NAME>-front --build-arg API_URL=$API_URL_LAB .
+            docker tag <PROJECT-NAME>-front:latest $AWS_ECR_LAB:latest
+            docker push $AWS_ECR_LAB:latest
+            ecs-deploy -c $AWS_CLUSTER_LAB -n $AWS_ECS_FRONTEND_LAB -i $AWS_ECR_LAB:latest -t $AWS_ECS_TIMEOUT -r $AWS_REGION
+  deploy_staging:
+    <<: *container_config
+    steps:
+      - *restore_repo
+      - *create_aws_credentials
+      - *install_aws_cli
+      - setup_remote_docker
+      - run:
+          name: Build, Push and Deploy to Staging
+          command: |
+            eval $(aws ecr get-login --region $AWS_REGION | sed 's|https://||' | sed 's|-e none ||')
+            docker build -t <PROJECT-NAME>-front --build-arg API_URL=$API_URL_STAGING .
+            docker tag <PROJECT-NAME>-front:latest $AWS_ECR_STAGING:latest
+            docker push $AWS_ECR_STAGING:latest
+            ecs-deploy -c $AWS_CLUSTER_STAGING -n $AWS_ECS_FRONTEND_STAGING -i $AWS_ECR_STAGING:latest -t $AWS_ECS_TIMEOUT -r $AWS_REGION
+  deploy_production:
+    <<: *container_config
+    steps:
+      - *restore_repo
+      - *create_aws_credentials
+      - *install_aws_cli
+      - setup_remote_docker
+      - run:
+          name: Build, Push and Deploy to Production
+          command: |
+            eval $(aws ecr get-login --region $AWS_REGION | sed 's|https://||' | sed 's|-e none ||')
+            docker build -t <PROJECT-NAME>-front --build-arg API_URL=$API_URL_PRODUCTION .
+            docker tag <PROJECT-NAME>-front:latest $AWS_ECR_PRODUCTION:$CIRCLE_TAG
+            docker push $AWS_ECR_PRODUCTION:$CIRCLE_TAG
+            ecs-deploy -c $AWS_CLUSTER_PRODUCTION -n $AWS_ECS_FRONTEND_PRODUCTION -i $AWS_ECR_PRODUCTION:$CIRCLE_TAG -t $AWS_ECS_TIMEOUT -r $AWS_REGION
+
+workflows:
+  version: 2
+  build_tests_and_analysis:
+    jobs:
+      - checkout_code
+      - install_dependencies:
+          requires:
+            - checkout_code
+      - deploy_lab:
+          requires:
+            - install_dependencies
+          filters:
+            branches:
+              only: lab
+      - deploy_staging:
+          requires:
+            - install_dependencies
+          filters:
+            branches:
+              only: staging
+
+  build_and_deploy_prod:
+    jobs:
+      - deploy_production:
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
