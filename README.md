@@ -28,4 +28,3 @@ Running `yarn build` webpack will build the app into a `dist` folder and then ex
 ## Good future features
 
 - [] Add support to 🃏 Jest
-- [] Setup React Router Dom
