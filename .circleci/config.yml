@@ -67,9 +67,9 @@ jobs:
           command: |
             eval $(aws ecr get-login --region $AWS_REGION | sed 's|https://||' | sed 's|-e none ||')
             docker build -t <PROJECT-NAME>-front --build-arg API_URL=$API_URL_LAB .
-            docker tag <PROJECT-NAME>-front:latest $AWS_ECR_LAB:latest
-            docker push $AWS_ECR_LAB:latest
-            ecs-deploy -c $AWS_CLUSTER_LAB -n $AWS_ECS_FRONTEND_LAB -i $AWS_ECR_LAB:latest -t $AWS_ECS_TIMEOUT -r $AWS_REGION
+            docker tag <PROJECT-NAME>-front:latest $AWS_ECR:lab
+            docker push $AWS_ECR:lab
+            ecs-deploy -c $AWS_CLUSTER_LAB -n $AWS_ECS_FRONTEND_LAB -i $AWS_ECR:lab -t $AWS_ECS_TIMEOUT -r $AWS_REGION
   deploy_staging:
     <<: *container_config
     steps:
@@ -82,9 +82,9 @@ jobs:
           command: |
             eval $(aws ecr get-login --region $AWS_REGION | sed 's|https://||' | sed 's|-e none ||')
             docker build -t <PROJECT-NAME>-front --build-arg API_URL=$API_URL_STAGING .
-            docker tag <PROJECT-NAME>-front:latest $AWS_ECR_STAGING:latest
-            docker push $AWS_ECR_STAGING:latest
-            ecs-deploy -c $AWS_CLUSTER_STAGING -n $AWS_ECS_FRONTEND_STAGING -i $AWS_ECR_STAGING:latest -t $AWS_ECS_TIMEOUT -r $AWS_REGION
+            docker tag <PROJECT-NAME>-front:latest $AWS_ECR:staging
+            docker push $AWS_ECR:staging
+            ecs-deploy -c $AWS_CLUSTER_STAGING -n $AWS_ECS_FRONTEND_STAGING -i $AWS_ECR:latest -t $AWS_ECS_TIMEOUT -r $AWS_REGION
   deploy_production:
     <<: *container_config
     steps:
@@ -97,9 +97,11 @@ jobs:
           command: |
             eval $(aws ecr get-login --region $AWS_REGION | sed 's|https://||' | sed 's|-e none ||')
             docker build -t <PROJECT-NAME>-front --build-arg API_URL=$API_URL_PRODUCTION .
-            docker tag <PROJECT-NAME>-front:latest $AWS_ECR_PRODUCTION:$CIRCLE_TAG
-            docker push $AWS_ECR_PRODUCTION:$CIRCLE_TAG
-            ecs-deploy -c $AWS_CLUSTER_PRODUCTION -n $AWS_ECS_FRONTEND_PRODUCTION -i $AWS_ECR_PRODUCTION:$CIRCLE_TAG -t $AWS_ECS_TIMEOUT -r $AWS_REGION
+            docker tag <PROJECT-NAME>-front:latest $AWS_ECR:$CIRCLE_TAG
+            docker push $AWS_ECR:$CIRCLE_TAG
+            docker tag <PROJECT-NAME>-front:latest $AWS_ECR:latest
+            docker push $AWS_ECR:latest
+            ecs-deploy -c $AWS_CLUSTER_PRODUCTION -n $AWS_ECS_FRONTEND_PRODUCTION -i $AWS_ECR:$CIRCLE_TAG -t $AWS_ECS_TIMEOUT -r $AWS_REGION
 
 workflows:
   version: 2
